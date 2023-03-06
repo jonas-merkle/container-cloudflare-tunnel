@@ -24,6 +24,12 @@ A Docker Compose container setup for a [Cloudflare tunnel](https://developers.cl
     ```bash
     nano .env
     ```
+    
+    Mark the `.env` file so it's not tracked by git:
+
+    ```bash
+    git update-index --assume-unchanged .env
+    ```
 
 2. Start container
 
