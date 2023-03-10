@@ -36,7 +36,7 @@ A Docker Compose container setup for a [Cloudflare tunnel](https://developers.cl
 2. Start container
 
     ```bash
-    docker-compose up -d
+    docker-compose up --build -d
     ````
 
 3. Stop container
