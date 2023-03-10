@@ -13,6 +13,9 @@ services:
     hostname: cloudflare-tunnel
     restart: unless-stopped
     command: tunnel run
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/hosts:/etc/hosts
     environment:
       - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
     labels:
