@@ -19,16 +19,18 @@ A Docker Compose container setup for a [Cloudflare tunnel](https://developers.cl
 
 1. Add environment variables
 
-    Add the missing information for the environment variables:
+    Add the missing information for the environment variables and host information:
 
     ```bash
     nano .env
+    nano config/hosts
     ```
     
-    Mark the `.env` file so it's not tracked by git:
+    Mark the `.env` and `hosts` file so they will not be tracked by git:
 
     ```bash
     git update-index --assume-unchanged .env
+    git update-index --assume-unchanged config/hosts
     ```
 
 2. Start container
