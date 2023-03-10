@@ -12,6 +12,7 @@ services:
     container_name: cloudflare-tunnel
     hostname: cloudflare-tunnel
     restart: unless-stopped
+    network_mode: "host"
     command: tunnel run
     volumes:
       - /etc/localtime:/etc/localtime:ro
