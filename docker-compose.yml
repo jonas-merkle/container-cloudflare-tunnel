@@ -5,10 +5,10 @@ services:
 
   # cloudflare tunnel
   cloudflare-tunnel:
-    #image: cloudflare/cloudflared
-    build:
-      context: ./src
-      dockerfile: ./Dockerfile
+    image: cloudflare/cloudflared
+    #build:
+    #  context: ./src
+    #  dockerfile: ./Dockerfile
     container_name: cloudflare-tunnel
     hostname: cloudflare-tunnel
     restart: unless-stopped
