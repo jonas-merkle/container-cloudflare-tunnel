@@ -7,40 +7,45 @@ A Docker Compose container setup for a [Cloudflare tunnel](https://developers.cl
 - [container-cloudflare-tunnel](#container-cloudflare-tunnel)
   - [Table of contents](#table-of-contents)
   - [Setup](#setup)
+    - [0. Requirements](#0-requirements)
+    - [1. Add environment variables](#1-add-environment-variables)
+    - [Stop container](#stop-container)
 
 ## Setup
 
-0. Requirements
+### 0. Requirements
 
-   - Docker
-   - Docker Compose
+- Docker
+- Docker Compose
 
-   - this setup assumes that [Cloudflare](https://www.cloudflare.com/) is the DNS provider for your domain.
+- this setup assumes that [Cloudflare](https://www.cloudflare.com/) is the DNS provider for your domain.
 
-1. Add environment variables
+### 1. Add environment variables
 
-    Add the missing information for the environment variables and host information:
+Add the missing information for the environment variables and host information:
 
-    ```bash
-    nano .env
-    nano config/hosts
+```bash
+nano .env
+nano config/hosts
+```
+
+Mark the `.env` and `hosts` file so they will not be tracked by git:
+
+```bash
+git update-index --assume-unchanged .env
+git update-index --assume-unchanged config/hosts
     ```
-    
-    Mark the `.env` and `hosts` file so they will not be tracked by git:
 
-    ```bash
-    git update-index --assume-unchanged .env
-    git update-index --assume-unchanged config/hosts
-    ```
+## Usage
 
-2. Start container
+### Start container
 
-    ```bash
-    docker-compose up --build -d
-    ````
+```bash
+docker compose up -d
+````
 
-3. Stop container
+### Stop container
 
-    ```bash
-    docker-compose down
-    ```
+```bash
+docker compose down
+```
