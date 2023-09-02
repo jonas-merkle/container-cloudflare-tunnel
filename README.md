@@ -9,6 +9,8 @@ A Docker Compose container setup for a [Cloudflare tunnel](https://developers.cl
   - [Setup](#setup)
     - [0. Requirements](#0-requirements)
     - [1. Add environment variables](#1-add-environment-variables)
+  - [Usage](#usage)
+    - [Start container](#start-container)
     - [Stop container](#stop-container)
 
 ## Setup
@@ -34,7 +36,7 @@ Mark the `.env` and `hosts` file so they will not be tracked by git:
 ```bash
 git update-index --assume-unchanged .env
 git update-index --assume-unchanged config/hosts
-    ```
+```
 
 ## Usage
 
