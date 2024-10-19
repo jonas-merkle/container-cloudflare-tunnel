@@ -10,6 +10,11 @@ services:
     container_name: cloudflare-tunnel
     hostname: cloudflare-tunnel
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
     network_mode: "host"
     command: tunnel run
     volumes:
@@ -17,6 +22,12 @@ services:
       - ./config/hosts:/etc/hosts
     environment:
       - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
+    healthcheck:
+      test: ["CMD", "cloudflared", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     labels:
       # enbale watchtower updates
       - "com.centurylinklabs.watchtower.enable=true"
