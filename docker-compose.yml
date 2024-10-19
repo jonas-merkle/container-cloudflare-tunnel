@@ -19,6 +19,11 @@ services:
       - ./config/hosts:/etc/hosts
     environment:
       - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
+    healthcheck:
+      test: ["CMD", "cloudflared", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     labels:
       # enbale watchtower updates
       - "com.centurylinklabs.watchtower.enable=true"

@@ -1,6 +1,6 @@
 # container-cloudflare-tunnel
 
-A Docker Compose container setup for a [Cloudflare tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/).
+A docker Compose container setup for a [Cloudflare tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/).
 
 ## Table of contents
 
