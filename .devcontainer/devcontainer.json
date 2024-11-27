@@ -1,0 +1,49 @@
+{
+    "name": "Ubuntu Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "options": [
+            "--ssh=default"
+        ]
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "installDockerBuildx": true
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscode-icons-team.vscode-icons",
+                "streetsidesoftware.code-spell-checker",
+                "streetsidesoftware.code-spell-checker-german",
+                "eamodio.gitlens",
+                "seatonjiang.gitmoji-vscode"
+            ],
+            "settings": {
+                "editor.fontFamily": "Hack Nerd Font Mono",
+                "editor.tabSize": 4,
+                "editor.insertSpaces": true,
+
+                "files.autoSave": "afterDelay",
+
+                "git.enableSmartCommit": true,
+                "git.confirmSync": false,
+                "git.autofetch": true,
+
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.fontFamily": "Hack Nerd Font Mono",
+
+                "telemetry.telemetryLevel": "crash",
+
+                "workbench.colorTheme": "Default Dark Modern",
+                "workbench.iconTheme": "vscode-icons",
+
+                "cSpell.language": "de,en",
+                "gitlens.telemetry.enabled": false
+            }
+        }
+    },
+    "remoteUser": "vscode"
+  }
+  
