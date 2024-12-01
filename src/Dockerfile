@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install dependencies and clean up to reduce image size
 RUN apt update && apt upgrade -y && \
     apt install -y --no-install-recommends \
-        git make golang && \
+        git make golang ca-certificates && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
 # Clone the cloudflared repo and build
