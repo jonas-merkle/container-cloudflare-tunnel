@@ -20,7 +20,7 @@ USER vscode
 
 # Install Powerlevel10k theme
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/vscode/.oh-my-zsh/custom/themes/powerlevel10k \
-    && exists
+    && sed -i 's|ZSH_THEME=".*"|ZSH_THEME="powerlevel10k/powerlevel10k"|' /home/vscode/.zshrc
 
 # Install Zsh plugins
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions /home/vscode/.oh-my-zsh/custom/plugins/zsh-autosuggestions \
