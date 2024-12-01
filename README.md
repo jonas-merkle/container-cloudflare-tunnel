@@ -17,6 +17,7 @@ A Docker Compose container setup for a [Cloudflare Tunnel](https://developers.cl
     - [Stopping the Container](#stopping-the-container)
     - [Viewing Logs](#viewing-logs)
   - [Cleanup](#cleanup)
+  - [Real-World Example: Hosting a Website Locally with Cloudflare Tunnel](#real-world-example-hosting-a-website-locally-with-cloudflare-tunnel)
   - [Security Notes](#security-notes)
   - [License](#license)
   - [Additional Resources](#additional-resources)
@@ -117,7 +118,16 @@ If you want to remove all containers, networks, and associated volumes:
 docker compose down --volumes --remove-orphans
 ```
 
-This command will also delete any dangling resources associated with the setup.
+## Real-World Example: Hosting a Website Locally with Cloudflare Tunnel
+
+If you're looking for a step-by-step guide on how to use Cloudflare Tunnel in a real-world scenario, check out this blog post by [John Wuller (@2br-2b)](https://github.com/2br-2b):
+
+[**How to Host a Webpage Locally Using Cloudflare Tunnels, Apache, and Docker**](https://codegito.xyz/2024/12/01/cloudflare-apache-docker/)
+
+In this tutorial, John demonstrates:
+
+- Setting up a local webpage with Apache and Docker.
+- Configuring a Cloudflare Tunnel to securely expose the webpage to the internet without requiring port forwarding.
 
 ## Security Notes
 
