@@ -16,7 +16,7 @@ A Docker Compose container setup for a [Cloudflare Tunnel](https://developers.cl
     - [Starting the Container](#starting-the-container)
     - [Stopping the Container](#stopping-the-container)
     - [Viewing Logs](#viewing-logs)
-  - [Cleanup](#cleanup)
+    - [Cleanup](#cleanup)
   - [Real-World Example: Hosting a Website Locally with Cloudflare Tunnel](#real-world-example-hosting-a-website-locally-with-cloudflare-tunnel)
   - [Security Notes](#security-notes)
   - [License](#license)
@@ -110,7 +110,7 @@ To view the logs for the running container, which can help with troubleshooting:
 docker logs cloudflare-tunnel
 ```
 
-## Cleanup
+### Cleanup
 
 If you want to remove all containers, networks, and associated volumes:
 
