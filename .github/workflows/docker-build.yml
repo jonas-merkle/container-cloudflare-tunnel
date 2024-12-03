@@ -47,6 +47,16 @@ jobs:
           file: ${{ inputs.dockerfile_path }}
           platforms: ${{ matrix.platform }}
           outputs: type=image
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
           tags: |
             ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest
             ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.sha }}
+
+        # Temp fix
+        # https://github.com/docker/build-push-action/issues/252
+        # https://github.com/moby/buildkit/issues/1896
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache  
