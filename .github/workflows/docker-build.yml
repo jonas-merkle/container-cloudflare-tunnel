@@ -1,19 +1,21 @@
-name: Docker CI/CD Pipeline
+name: Docker Build Workflow
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-    tags:
-      - 'version-*'
-  schedule:
-    - cron: '0 0 1 * *'
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      dockerfile_path:
+        required: true
+        type: string
+      context_path:
+        required: true
+        type: string
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [linux/amd64, linux/arm64]
     outputs:
       image: ${{ steps.docker_build.outputs.image }}
     steps:
@@ -34,16 +36,17 @@ jobs:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
+            ${{ runner.os }}-buildx-${{ github.event.before }}
             ${{ runner.os }}-buildx-
 
       - name: Build Docker image
         id: docker_build
         uses: docker/build-push-action@v3
         with:
-          context: ./src
-          file: ./src/Dockerfile
+          context: ${{ inputs.context_path }}
+          file: ${{ inputs.dockerfile_path }}
+          platforms: ${{ matrix.platform }}
           outputs: type=image
           tags: |
             ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest
-            ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/version-') && 'ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.ref_name }}' }}
-          platforms: linux/amd64,linux/arm64
+            ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.sha }}

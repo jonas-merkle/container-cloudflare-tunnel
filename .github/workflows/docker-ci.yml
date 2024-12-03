@@ -1,0 +1,29 @@
+name: Docker CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    tags:
+      - 'version-*'
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+jobs:
+  pre-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Lint Dockerfile
+        run: dockerfile-lint ./src/Dockerfile
+
+  build:
+    needs: pre-validation
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      dockerfile_path: ./src/Dockerfile
+      context_path: ./src
