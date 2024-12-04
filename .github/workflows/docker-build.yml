@@ -17,7 +17,7 @@ jobs:
       matrix:
         platform: [linux/amd64, linux/arm64]
     outputs:
-      image: ${{ steps.docker_build.outputs.image }}
+      image: ${{ steps.save_image.outputs.image }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
           context: ${{ inputs.context_path }}
           file: ${{ inputs.dockerfile_path }}
           platforms: ${{ matrix.platform }}
-          outputs: type=image
+          outputs: type=docker
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
           tags: |
@@ -59,4 +59,8 @@ jobs:
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache  
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      - name: Save Docker image reference
+        id: save_image
+        run: echo "image=ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest" >> $GITHUB_OUTPUT

@@ -25,3 +25,4 @@ jobs:
     uses: ./.github/workflows/docker-publish.yml
     with:
       image: ${{ needs.build.outputs.image }}
+      
