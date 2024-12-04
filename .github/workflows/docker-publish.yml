@@ -3,7 +3,10 @@ name: Docker Publish Workflow
 on:
   workflow_call:
     inputs:
-      image:
+      platforms:
+        required: true
+        type: string
+      image_name:
         required: true
         type: string
 
@@ -14,9 +17,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Load Docker image
-        run: |
-          docker pull ${{ inputs.image }}
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: all
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
@@ -25,13 +29,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push Docker image
-        run: |
-          docker push ${{ inputs.image }}
-          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == refs/tags/version-* ]]; then
-            docker tag ${{ inputs.image }} ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.ref_name }}
-            docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.ref_name }}
-          fi
+      - name: Push multi-platform image
+        uses: docker/build-push-action@v6
+        with:
+          platforms: ${{ inputs.platforms }}
+          tags: |
+            ${{ inputs.image_name }}:latest
+            ${{ inputs.image_name }}:${{ github.ref_name }}
+          push: true
 
       #- name: Sign Docker image
       #  uses: sigstore/cosign-installer@v3.7.0
@@ -40,7 +45,7 @@ jobs:
 
       #- name: Cosign sign
       #  run: |
-      #    cosign sign --key ${{ secrets.COSIGN_KEY }} ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest
+      #    cosign sign --key ${{ secrets.COSIGN_KEY }} ${{ inputs.image_name }}:latest
       #    if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == refs/tags/version-* ]]; then
-      #      cosign sign --key ${{ secrets.COSIGN_KEY }} ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.ref_name }}
+      #      cosign sign --key ${{ secrets.COSIGN_KEY }} ${{ inputs.image_name }}:${{ github.ref_name }}
       #    fi

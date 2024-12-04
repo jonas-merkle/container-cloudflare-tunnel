@@ -12,17 +12,17 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build:
     uses: ./.github/workflows/docker-build.yml
     with:
       dockerfile_path: ./src/Dockerfile
       context_path: ./src
+      platforms: linux/amd64,linux/arm64
 
   publish:
     needs: build
     if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/version-') || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
     uses: ./.github/workflows/docker-publish.yml
     with:
-      image: ${{ needs.build.outputs.image }}
-      
+      platforms: linux/amd64,linux/arm64
+      image_name: ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
