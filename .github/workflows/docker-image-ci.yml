@@ -9,14 +9,14 @@ on:
       - 'v*'
     paths:
       - 'src/**'
-      - '.github/workflows/**'
+      - '.github/workflows/docker-image-ci.yml'
 
   pull_request:
     branches:
       - main
     paths:
       - 'src/**'
-      - '.github/workflows/**'
+      - '.github/workflows/docker-image-ci.yml'
 
   schedule:
     - cron: '0 0  1 * *'
@@ -27,5 +27,5 @@ jobs:
   build-and-publish:
     uses: jonas-merkle/docker-workflow/.github/workflows/build-and-publish-docker-image.yml@main
     with:
-      registry-image: ghcr.io/cloudflare-tunnel
+      registry-image: ghcr.io/${{ github.repository }}
       work-dir: ./src
