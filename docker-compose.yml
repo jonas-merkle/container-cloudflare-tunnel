@@ -3,7 +3,8 @@ services:
 
   # cloudflare tunnel
   cloudflare-tunnel:
-    image: cloudflare/cloudflared
+    image: ghcr.io/jonas-merkle/container-cloudflare-tunnel:main
+    #image: cloudflare/cloudflared
     #build:
     #  context: ./src
     #  dockerfile: ./Dockerfile
@@ -29,5 +30,5 @@ services:
       retries: 3
       start_period: 10s
     labels:
-      # enbale watchtower updates
+      # enable watchtower updates
       - "com.centurylinklabs.watchtower.enable=true"
