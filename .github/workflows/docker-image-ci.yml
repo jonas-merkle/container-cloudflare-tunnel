@@ -25,7 +25,7 @@ on:
 
 jobs:
   build-and-publish:
-    uses: jonas-merkle/docker-workflow/.github/workflows/build-and-publish-docker-image.yml@v1.0.0
+    uses: jonas-merkle/docker-workflow/.github/workflows/build-and-publish-docker-image.yml@main
     with:
       registry-image: ghcr.io/cloudflare-tunnel
       work-dir: ./src
