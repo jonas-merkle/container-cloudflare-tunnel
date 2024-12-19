@@ -7,7 +7,12 @@ services:
 
   # Cloudflare Tunnel Service
   cloudflare-tunnel:
-    image: cloudflare/cloudflared:latest              # Pull the latest version of the Cloudflare Tunnel image
+    #image: cloudflare/cloudflared:latest              # Pull the latest version of the Cloudflare Tunnel image
+	image: ghcr.io/jonas-merkle/container-cloudflare-tunnel:main
+    #image: cloudflare/cloudflared
+    #build:
+    #  context: ./src
+    #  dockerfile: ./Dockerfile
     container_name: cloudflare-tunnel                 # Name of the Cloudflare Tunnel container
     hostname: cloudflare-tunnel                       # Hostname for the Cloudflare Tunnel container
 
