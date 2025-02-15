@@ -2,6 +2,10 @@
 
 A Docker Compose container setup for a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/). This setup allows you to securely expose a local service to the internet using Cloudflare's infrastructure.
 
+<details>
+
+<summary>Table of Contents</summary>
+
 ## Table of Contents
 
 - [Container Cloudflare Tunnel](#container-cloudflare-tunnel)
@@ -17,10 +21,14 @@ A Docker Compose container setup for a [Cloudflare Tunnel](https://developers.cl
     - [Stopping the Container](#stopping-the-container)
     - [Viewing Logs](#viewing-logs)
     - [Cleanup](#cleanup)
-  - [Real-World Example: Hosting a Website Locally with Cloudflare Tunnel](#real-world-example-hosting-a-website-locally-with-cloudflare-tunnel)
+  - [Real-World Examples](#real-world-examples)
+    - [Example 1: Hosting a Webpage with Apache and Docker](#example-1-hosting-a-webpage-with-apache-and-docker)
+    - [Example 2: Secure Self-Hosting with Cloudflare Zero Trust Tunnels](#example-2-secure-self-hosting-with-cloudflare-zero-trust-tunnels)
   - [Security Notes](#security-notes)
   - [License](#license)
   - [Additional Resources](#additional-resources)
+  
+</details>
 
 ## Introduction
 
@@ -118,16 +126,28 @@ If you want to remove all containers, networks, and associated volumes:
 docker compose down --volumes --remove-orphans
 ```
 
-## Real-World Example: Hosting a Website Locally with Cloudflare Tunnel
+## Real-World Examples
 
-If you're looking for a step-by-step guide on how to use Cloudflare Tunnel in a real-world scenario, check out this blog post by [John Wuller (@2br-2b)](https://github.com/2br-2b):
+If you're looking for a step-by-step guide on how to use Cloudflare Tunnel in a real-world scenario, check out these blog posts:
+
+### Example 1: Hosting a Webpage with Apache and Docker
+
+By [John Wuller (@2br-2b)](https://github.com/2br-2b):
 
 [**How to Host a Webpage Locally Using Cloudflare Tunnels, Apache, and Docker**](https://codegito.xyz/2024/12/01/cloudflare-apache-docker/)
 
-In this tutorial, John demonstrates:
+In this tutorial, John demonstrates based on this repository:
 
 - Setting up a local webpage with Apache and Docker.
 - Configuring a Cloudflare Tunnel to securely expose the webpage to the internet without requiring port forwarding.
+
+### Example 2: Secure Self-Hosting with Cloudflare Zero Trust Tunnels
+
+By [Sven van Ginkel](https://medium.com/@svenvanginkel):
+
+[**Self-Hosting Securely with Cloudflare Zero Trust Tunnels**](https://medium.com/@svenvanginkel/self-hosting-securely-with-cloudflare-zero-trust-tunnels-0a9169378f78)
+
+In this guide, Sven explains the fundamental concepts of Cloudflare Zero Trust Tunnels and provides an in-depth walkthrough of the setup process on Cloudflare’s side. While his Docker Compose configuration is not based on this repository, the core principles remain similar.
 
 ## Security Notes
 
